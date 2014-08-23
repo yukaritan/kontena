@@ -1,6 +1,7 @@
+from collections import OrderedDict
 import re
 
-triggers = {}
+triggers = OrderedDict()
 
 
 def hook(regex: str):
