@@ -1,3 +1,8 @@
+"""
+The bot uses hooks and patterns to figure out what to do. Most of these are based on hooks found in Bucket.
+http://wiki.xkcd.com/irc/Bucket#Teaching_factoids_to_Bucket
+"""
+
 from utils.hookutils import hook
 
 
@@ -48,11 +53,14 @@ def verb(match: dict):
 def auxiliary_verb(match: dict):
     """
     X is Y
-        The most common type of factoid you can teach to Bucket is by simply saying "X is Y". If someone says "X" later on, Bucket will reply "X is Y"
+        The most common type of factoid you can teach to Bucket is by simply saying "X is Y".
+        If someone says "X" later on, Bucket will reply "X is Y"
 
         Be careful about accidentally creating a new factoid while talking to Bucket.
-        You can also say "X is also Y", this was formerly required to attach multiple factoids to one trigger so you may see older users use this.
-        If you type "X is Y is Z", Bucket will split it on the first "is", making the trigger "X" and the factoid "Y is Z" and Bucket will respond "X is Y is Z".
+        You can also say "X is also Y", this was formerly required to attach multiple factoids to one trigger so you
+        may see older users use this.
+        If you type "X is Y is Z", Bucket will split it on the first "is", making the trigger "X" and
+        the factoid "Y is Z" and Bucket will respond "X is Y is Z".
 
         If you wanted 'X is Y' to trigger 'Z', teach Bucket 'X is Y <is> Z'. See <verb> below.
 
