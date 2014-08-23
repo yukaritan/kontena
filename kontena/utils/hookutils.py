@@ -43,4 +43,4 @@ def find_matching_functions(text: str) -> (dict, callable):
     for trigger, function in triggers.items():
         match = trigger.match(text)
         if match:
-            yield match, function
+            yield match.groupdict(), function
