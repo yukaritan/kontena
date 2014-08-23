@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-import sys
-sys.path.append('.')
-
 # we need to import the hooks we want to use
 from hooks import basic
 from utils.hookutils import find_matching_function
