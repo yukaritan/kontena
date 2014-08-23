@@ -1,4 +1,4 @@
-from utils.handlerutils import hook
+from utils.hookutils import hook
 
 
 @hook("(?P<thing1>.+)\s+is\s+(?P<thing2>.+)")

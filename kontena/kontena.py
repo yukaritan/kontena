@@ -5,7 +5,7 @@ sys.path.append('.')
 
 # we need to import the hooks we want to use
 from hooks import basic
-from utils.handlerutils import find_matching_function
+from utils.hookutils import find_matching_function
 
 
 class Kontena:
