@@ -3,8 +3,8 @@
 import sys
 sys.path.append('.')
 
-# we need to import the handlers we want to use
-from handlers import basic
+# we need to import the hooks we want to use
+from hooks import basic
 from utils.handlerutils import find_matching_function
 
 
