@@ -14,16 +14,35 @@ import os
 engine = create_engine('sqlite:///info.db', echo=False)
 
 metadata = MetaData()
-
-
-users = Table('users', metadata,
-              Column("sentence",String),
-        )
-
-
-ins = users.insert()
+#ins = users.insert()
 conn = engine.connect()
 Base = declarative_base()
+
+test =   """                                                                                            \
+                                                                                                         
+    CREATE TABLE users (                                                                                \
+                                                                                                         
+        username VARCHAR PRIMARY KEY,                                                                   \
+                                                                                                         
+        password VARCHAR NOT NULL                                                                       \
+                                                                                                         
+    );                                                                                                  \
+                                                                                                         
+    """
+
+
+
+
+conn.execute(test)
+#conn.execute(test1)
+
+conn.execute(
+    """                                                                                                  
+    INSERT INTO users (username, password) VALUES (?, ?);                                                
+    """,
+    "foo", "bar"
+)
+
 
 #Base.metadata.create_all(engine)
 
@@ -44,11 +63,11 @@ def belonging(match: dict):
         After using this, if someone says "X", Bucket will respond "X's Y".
         Apostrophes - learn how to use them before using this.
     """
-    global ins
+#    global ins
     print("I have learned that {thing} belongs to {person}".format(**match))
-    sentence_ = return_fn(text)
-    ins = users.insert().values(sentence=sentence_)
-    conn.execute(ins)
+#    sentence_ = return_fn(text)
+#    ins = users.insert().values(sentence=sentence_)
+#    conn.execute(ins)
 
 
 @hook("(?P<thing1>.+)\s+<action>\s+(?P<thing2>.+)")

@@ -1,0 +1,29 @@
+ƒfrom sqlalchemy import *
+engine = create_engine('sqlite:///info.db', echo=False)
+metadata = MetaData()
+conn = engine.connect()
+
+test =   """                                                                                                  
+    CREATE TABLE users (                                                                                 
+        username VARCHAR PRIMARY KEY,                                                                    
+        password VARCHAR NOT NULL                                                                        
+    );                                                                                                   
+    """
+
+
+conn.execute(test)
+
+
+
+conn.execute(
+    """
+    INSERT INTO users (username, password) VALUES (?, ?);
+    """,
+    "foo", "bar"
+)
+
+
+#Base = declarative_base()
+
+#ins = users.insert().values(sentence="test")                                                            
+conn.close()
