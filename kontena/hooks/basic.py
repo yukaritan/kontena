@@ -3,51 +3,9 @@ The bot uses hooks and patterns to figure out what to do. Most of these are base
 http://wiki.xkcd.com/irc/Bucket#Teaching_factoids_to_Bucket
 """
 
-from sqlalchemy.ext.declarative import declarative_base
 from utils.hookutils import *
-from sqlalchemy import *
 import os
-
-#if os.path.exists("info.db"):
-#    pass
-#else:
-engine = create_engine('sqlite:///info.db', echo=False)
-
-metadata = MetaData()
-#ins = users.insert()
-conn = engine.connect()
-Base = declarative_base()
-
-test =   """                                                                                            \
-                                                                                                         
-    CREATE TABLE users (                                                                                \
-                                                                                                         
-        username VARCHAR PRIMARY KEY,                                                                   \
-                                                                                                         
-        password VARCHAR NOT NULL                                                                       \
-                                                                                                         
-    );                                                                                                  \
-                                                                                                         
-    """
-
-
-
-
-conn.execute(test)
-#conn.execute(test1)
-
-conn.execute(
-    """                                                                                                  
-    INSERT INTO users (username, password) VALUES (?, ?);                                                
-    """,
-    "foo", "bar"
-)
-
-
-#Base.metadata.create_all(engine)
-
-#ins = users.insert().values(sentence="test")
-#conn.execute(ins)
+from utils.dbutils import *
 
 #
 #  Teaching Kontena
@@ -55,20 +13,17 @@ conn.execute(
 
 @hook("(?P<person>.+?)<'s>\s+(?P<thing>.+)")
 def belonging(match: dict):
-#    global engine
-#    global metadata
     
     """
     X<'s> Y
         After using this, if someone says "X", Bucket will respond "X's Y".
         Apostrophes - learn how to use them before using this.
     """
-#    global ins
+    
     print("I have learned that {thing} belongs to {person}".format(**match))
-#    sentence_ = return_fn(text)
-#    ins = users.insert().values(sentence=sentence_)
-#    conn.execute(ins)
-
+    liste=hook_db()
+    for x in liste:
+        print(x)
 
 @hook("(?P<thing1>.+)\s+<action>\s+(?P<thing2>.+)")
 def action(match: dict):
