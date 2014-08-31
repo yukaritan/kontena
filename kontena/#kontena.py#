@@ -14,7 +14,7 @@ class Kontena:
 
         match_function = find_matching_function(text)
         #sent_list = input_(text)
-        #hook_db(text)
+        hook_db(text)
         if match_function:
             match, function = match_function
             hook_db(text)

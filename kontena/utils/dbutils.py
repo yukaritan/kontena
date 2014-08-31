@@ -43,7 +43,7 @@ def hook_db(text = None):
     """,
     text
     )
-    return db_list[0]
+    return db_list
 
 
 
