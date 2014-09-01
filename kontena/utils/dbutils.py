@@ -6,10 +6,10 @@ import os
 db_list = []
 word_list=[]
 
-if os.path.exists(""):
-    pass
-else:
-    engine = create_engine('sqlite:///logs.db', echo=False)
+#if os.path.exists("logs.db"):
+   # pass
+
+engine = create_engine('sqlite:///logs.db', echo=False)
 
 connection = engine.connect()
 
