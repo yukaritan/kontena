@@ -34,7 +34,7 @@ def find_matching_function_db(text: str) -> (dict, callable):
     
     
     # this calls find_matching_functions and returns only the first match
-    for match, function in find_matching_functions(text):
+    for match, function in find_matching_functions_db(text):
         return match, function
 
 

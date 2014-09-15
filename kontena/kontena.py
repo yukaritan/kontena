@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 # we need to import the hooks we want to use
-from hooks import basic
+#from hooks import basic
+from hooks import basicdb
 from utils.hookutils import *
 from utils.dbutils import *
 from utils.hookdbutils import *
@@ -19,11 +20,11 @@ class Kontena:
         #hook_db(text)
         if match_function:
             match, function = match_function
-            hook_db(text)
+#            hook_db(text)
             function(match)
         if match_function_db:
             mathcdb, functiondb = match_function_db
-            dbhook(text)
+#            dbhook(text)
             function(matchdb)
 
 

@@ -4,23 +4,11 @@ http://wiki.xkcd.com/irc/Bucket#Teaching_factoids_to_Bucket
 """
 
 from utils.hookutils import *
-import os
 from utils.dbutils import *
-from sqlalchemy.sql import *
-from sqlalchemy import *
-from sqlalchemy.engine import *
 
 #
 #  Teaching Kontena
 #
-
-
-if os.path.exists("logs.db"):
-    pass
-else:
-    engine = create_engine('sqlite:///logs.db', echo=False)
-
-connection = engine.connect()
 
 
 
@@ -31,13 +19,11 @@ def belonging(match: dict):
     what belongs to  <thing>?
         After using this, Kontena will tell you what belongs to thing.
     """
-    global connection
-
-    s = select([users])    
-    result = connection.execute(s)
-    for row in result:
+    test=output_db()
+    print(test)
+    for row in test:
         print(row)
-
+    print("test")
 
 @hook("(?P<thing1>.+)\s+<action>\s+(?P<thing2>.+)")
 def action(match: dict):
