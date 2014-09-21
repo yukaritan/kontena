@@ -1,14 +1,15 @@
-#from hooks.basic import *
 from sqlalchemy import *
 from sqlalchemy.engine import *
 from sqlalchemy.sql import *
 import os
+from collections import *
+import re
+
+triggers = OrderedDict()
 
 db_list = []
 word_list=[]
 
-#if os.path.exists("logs.db"):
-   # pass
 
 engine = create_engine('sqlite:///logs.db', echo=False)
 
@@ -30,23 +31,27 @@ except:
 users = Table('users', metadata, Column('sentence', String()))
 
 
-def hook_db(text = None):
+def hook_db(regex:str):
     
     """Used to save what was said"""
 
-    global db_list
+    #global db_list
     #global word_list
     
+    #db_list.append(text)
     
-    db_list.append(text)
-    
-    connection.execute(
-    """
-    INSERT INTO users (sentence) VALUES (?);
-    """,
-    text
-    )
-    return db_list
+    #connection.execute(
+    #"""
+    #INSERT INTO users (sentence) VALUES (?);
+    #""",
+    #regex
+    #)
+
+    def wrapper(fn):
+        triggers[re.compile(regex,re.IGNORECASE)]=fn
+        return fn
+
+    return  wrapper
 
 def insert_db(text):
 
@@ -61,7 +66,6 @@ def output_db():
     
     global connection
     global users
-
     s = select([users])
     result = connection.execute(s) 
     return(result)
@@ -71,3 +75,28 @@ def input_(input__: dict):
     word_list = input__
     return word_list
  
+def find_matching_function_db(text: str) -> (dict, callable):
+
+    """Matchest a given string against known triggers, stops on the\
+    first positive result"""
+
+
+    for match, function in find_matching_functions_db(text):
+        return match, function
+
+
+def find_matching_functions_db(text: str) -> (dict, callable):
+
+    """Matchest a given string against known triggers, tries to find\
+as many results as possible"""
+
+    for trigger, function in triggers.items():
+        match = trigger.match(text)
+        if match:
+            yield match.groupdict(), function
+
+def return_fn(text:str):
+    return text
+
+
+

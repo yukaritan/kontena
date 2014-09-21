@@ -12,18 +12,19 @@ from utils.dbutils import *
 
 
 
-@hook("what belongs to (?P<thing>.+)")
+@hook_db("what belongs to (?P<thing>.+)")
 def belonging(match: dict):
     
     """
     what belongs to  <thing>?
         After using this, Kontena will tell you what belongs to thing.
     """
-    test=output_db()
-    print(test)
-    for row in test:
-        print(row)
-    print("test")
+    #testlist = []
+    #test1,test2=output_db()
+    #print(test)
+    #for row in test1:
+    #    testlist.append(str(row))
+    print("test {thing}".format(**match))
 
 @hook("(?P<thing1>.+)\s+<action>\s+(?P<thing2>.+)")
 def action(match: dict):

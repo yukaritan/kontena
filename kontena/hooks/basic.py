@@ -21,9 +21,7 @@ def belonging(match: dict):
     """
     
     print("I have learned that {thing} belongs to {person}".format(**match))
-    liste=hook_db()
-    for x in liste:
-        print(x)
+
 
 @hook("(?P<thing1>.+)\s+<action>\s+(?P<thing2>.+)")
 def action(match: dict):
