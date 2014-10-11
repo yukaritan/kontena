@@ -63,6 +63,7 @@ as many results as possible"""
 
     for trigger, function in triggers.items():
         match = trigger.match(text)
+        insert_db(text,"facts")
         if match:
             yield match.groupdict(), function
 

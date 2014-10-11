@@ -11,7 +11,7 @@ from utils.hookdbutils import *
 
 
 
-@hook_db("what belongs to (?P<thing>.+)")
+@hook_db("what is (?P<thing>.+)")
 def belonging(match: dict):
     
     """
@@ -23,5 +23,9 @@ def belonging(match: dict):
     #print(test)
     #for row in test1:
     #    testlist.append(str(row))
-    print("test {thing}".format(**match))
+    answer = re.compile(match["thing"]+" is\s+(?P<y>.+)")
+    print(match["thing"])
+    lookfor(answer)
+
+    
 
